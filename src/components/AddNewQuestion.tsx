@@ -54,9 +54,21 @@ const AddNewQuestion = () => {
           },
         }
       )
-      res.data.headers["Content-Type"]
+
       if (res.status === 201) {
         setMessage("Question created Successfully")
+
+        setExamType("")
+        setSubject("")
+        setQuestion("")
+        setCorrectAnswer("")
+        setIncorrectAnswer1("")
+        setIncorrectAnswer2("")
+        setIncorrectAnswer3("")
+
+        setTimeout(() => {
+          setMessage("")
+        }, 5000)
       }
 
       return res.data
@@ -73,7 +85,7 @@ const AddNewQuestion = () => {
         Add New Question
       </h3>
       {message && (
-        <p className="absolute top-5 right-5 bg-green-500 text-gray-50 font-semibold p-3 rounded-md">
+        <p className="absolute top-16 right-16 bg-green-500 text-gray-50 font-semibold p-3 rounded-md">
           {message}
         </p>
       )}
