@@ -9,7 +9,7 @@ const subjects = ["Mathematics", "English Language", "Physics", "Chemistry"]
 
 const AddNewQuestion = () => {
   const [question, setQuestion] = useState<string>("")
-  const [examType, setExamType] = useState("JAMB/UTME")
+  const [examType, setExamType] = useState("")
   const [subject, setSubject] = useState<string>("")
   const [correctAnswer, setCorrectAnswer] = useState<string>("")
   const [incorrectAnswer1, setIncorrectAnswer1] = useState<string>()
@@ -80,7 +80,7 @@ const AddNewQuestion = () => {
       <form onSubmit={handleSubmit} className="w-[448px]">
         <div className="flex flex-col space-y-3 mb-5 w-full">
           <label htmlFor="examType">Exam Type</label>
-          <select
+          {/* <select
             className="outline-none border-2 bg-gray-50 p-2"
             name="examType"
             id="examType"
@@ -93,12 +93,19 @@ const AddNewQuestion = () => {
                 {examType}
               </option>
             ))}
-          </select>
+          </select> */}
+          <input
+            type="text"
+            className="outline-none border-2 bg-gray-50 p-2"
+            name="examType"
+            value={examType}
+            onChange={(e) => setExamType(e.target.value)}
+          />
         </div>
 
         <div className="flex flex-col space-y-3 mb-5 w-full">
           <label htmlFor="subject">Subject</label>
-          <select
+          {/* <select
             className="outline-none border-2 bg-gray-50 p-2"
             name="subject"
             required
@@ -111,7 +118,15 @@ const AddNewQuestion = () => {
                 {subject}
               </option>
             ))}
-          </select>
+          </select> */}
+
+          <input
+            type="text"
+            className="outline-none border-2 bg-gray-50 p-2"
+            value={subject}
+            name="subject"
+            onChange={(e) => setSubject(e.target.value)}
+          />
         </div>
 
         {/* <div>
