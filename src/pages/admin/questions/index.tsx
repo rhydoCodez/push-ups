@@ -105,7 +105,7 @@ export default Questions
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await Question.find({})
 
-  const allQuestions = JSON.parse(JSON.stringify(res))
+  const allQuestions = await JSON.parse(JSON.stringify(res))
 
   return {
     props: {

@@ -1,6 +1,7 @@
 import { AddNewQuestion, Footer, Header } from "../../../components"
-import { Sidebar } from "../../../components/utilities"
-
+import { Sidebar } from "@/src/components/utilities"
+import { connectDB } from "@/src/utils"
+connectDB()
 
 const AddQuestion = () => {
   return (

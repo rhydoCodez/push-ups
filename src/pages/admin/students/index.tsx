@@ -126,7 +126,7 @@ export default Students
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await Student.find({})
-  const allStudents = JSON.parse(JSON.stringify(res))
+  const allStudents = await JSON.parse(JSON.stringify(res))
   
 
   return {

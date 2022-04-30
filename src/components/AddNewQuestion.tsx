@@ -1,5 +1,8 @@
 import { FormEvent, useState } from "react"
 import axios from "axios"
+import { connectDB } from "@/src/utils"
+
+connectDB()
 
 const examTypes = ["JAMB/UTME", "ACADEMICS", "POST JAMB/UTME"]
 const subjects = ["Mathematics", "English Language", "Physics", "Chemistry"]
@@ -15,6 +18,7 @@ const AddNewQuestion = () => {
 
   const [isSubmit, setIsSubmit] = useState(false)
   const [errors, setErrors] = useState<object>({})
+  const [message, setMessage] = useState<any>(null)
 
   const validate = () => {
     let errors = {}
@@ -51,10 +55,14 @@ const AddNewQuestion = () => {
         }
       )
       res.data.headers["Content-Type"]
+      if (res.status === 201) {
+        setMessage("Question created Successfully")
+      }
 
       return res.data
     } catch (err: any) {
       console.log("Error adding question", err.message)
+      setMessage(err.message)
       return "Error adding Question"
     }
   }
@@ -64,6 +72,11 @@ const AddNewQuestion = () => {
       <h3 className="text-genius-blue font-semibold text-2xl">
         Add New Question
       </h3>
+      {message && (
+        <p className="absolute top-5 right-5 bg-green-500 text-gray-50 font-semibold p-3 rounded-md">
+          {message}
+        </p>
+      )}
       <form onSubmit={handleSubmit} className="w-[448px]">
         <div className="flex flex-col space-y-3 mb-5 w-full">
           <label htmlFor="examType">Exam Type</label>

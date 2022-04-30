@@ -24,7 +24,7 @@ export default Staffs
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await Admin.find({})
-  const allStaffs = JSON.parse(JSON.stringify(res))
+  const allStaffs = await JSON.parse(JSON.stringify(res))
 
   return {
     props: {
