@@ -72,6 +72,7 @@ const AddNewQuestion = () => {
             name="examType"
             id="examType"
             value={examType}
+            required
             onChange={(e) => setExamType(e.target.value)}
           >
             {examTypes.map((examType, index) => (
@@ -87,6 +88,7 @@ const AddNewQuestion = () => {
           <select
             className="outline-none border-2 bg-gray-50 p-2"
             name="subject"
+            required
             id="subject"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
@@ -110,6 +112,7 @@ const AddNewQuestion = () => {
           <textarea
             className="w-full min-h-[60px] p-3 outline-none border-2"
             value={question}
+            required
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Enter Question here..."
           />
@@ -122,6 +125,7 @@ const AddNewQuestion = () => {
             <input
               className="outline-none border-2 bg-gray-50 p-2"
               type="text"
+              required
               id="correctAnswer"
               value={correctAnswer}
               onChange={(e) => setCorrectAnswer(e.target.value)}
@@ -133,6 +137,7 @@ const AddNewQuestion = () => {
               className="outline-none border-2 bg-gray-50 p-2"
               type="text"
               id="option B"
+              required
               value={incorrectAnswer1}
               onChange={(e) => setIncorrectAnswer1(e.target.value)}
             />
@@ -143,6 +148,7 @@ const AddNewQuestion = () => {
               className="outline-none border-2 bg-gray-50 p-2"
               type="text"
               id="option C"
+              required
               value={incorrectAnswer2}
               onChange={(e) => setIncorrectAnswer2(e.target.value)}
             />
@@ -153,6 +159,7 @@ const AddNewQuestion = () => {
               className="outline-none border-2 bg-gray-50 p-2"
               type="text"
               id="option D"
+              required
               value={incorrectAnswer3}
               onChange={(e) => setIncorrectAnswer3(e.target.value)}
             />

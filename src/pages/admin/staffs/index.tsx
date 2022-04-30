@@ -1,5 +1,8 @@
 import { GetServerSideProps } from "next"
 import axios from "axios"
+import Admin from "@/src/models/admin"
+import { connectDB } from "@/src/utils"
+connectDB()
 
 const Staffs = ({ staffs }: { staffs: any[] }) => {
   return (
@@ -20,9 +23,8 @@ const Staffs = ({ staffs }: { staffs: any[] }) => {
 export default Staffs
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/auth/admin/register")
-  console.log(res.data)
-  const allStaffs = res.data.staffs
+  const res = await Admin.find({})
+  const allStaffs = JSON.parse(JSON.stringify(res))
 
   return {
     props: {

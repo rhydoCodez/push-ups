@@ -7,6 +7,7 @@ import { GetServerSideProps } from "next"
 import { connectDB } from "@/src/utils"
 import Question from "@/src/models/question"
 import axios from "axios"
+connectDB()
 
 interface IQuestions {
   _id: string
@@ -102,13 +103,13 @@ const Questions = ({ questions }: { questions: IQuestions[] }) => {
 export default Questions
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/question")
-  
-  const allQuestions = res.data.questions
+  const res = await Question.find({})
+
+  const allQuestions = JSON.parse(JSON.stringify(res))
 
   return {
     props: {
-      questions: allQuestions
-    }
+      questions: allQuestions,
+    },
   }
 }

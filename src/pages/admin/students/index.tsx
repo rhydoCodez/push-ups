@@ -9,6 +9,7 @@ import { IoMdAdd } from "react-icons/io"
 import Link from "next/link"
 import { connectDB } from "@/src/utils"
 import Student from "@/src/models/student"
+connectDB()
 
 interface IStudent {
   emailAddress: string
@@ -124,9 +125,9 @@ const Students = ({ students }: { students: IStudent[] }) => {
 export default Students
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/students")
-  console.log(res.data)
-  const allStudents = res.data.students
+  const res = await Student.find({})
+  const allStudents = JSON.parse(JSON.stringify(res))
+  
 
   return {
     props: {
