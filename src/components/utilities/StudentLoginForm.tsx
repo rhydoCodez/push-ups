@@ -7,7 +7,7 @@ import axios from "axios"
 const StudentLoginForm = () => {
   const [studentEmail, setStudentEmail] = useState<string>("")
   const [studentPassword, setStudentPassword] = useState<string>("")
-  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [message, setMessage] = useState<string>("")
 
   const router = useRouter()
 
@@ -24,15 +24,16 @@ const StudentLoginForm = () => {
           },
         }
       )
-      // res.data.headers["Content-Type"]
 
-      // if (res.status === 200) {
+      setMessage(res.data.message)
       router.push("/exam")
-      console.log(res.data)
-      // }
+      console.log(res)
     } catch (err: any) {
-      setErrorMessage(err.message)
-      console.log(err.message)
+      setMessage(err.response.data.message)
+      setTimeout(() => {
+        setMessage("")
+      }, 5000)
+      console.log(err.response.data.message)
     }
   }
 
@@ -43,9 +44,9 @@ const StudentLoginForm = () => {
       </div>
 
       {/* error message */}
-      {errorMessage && (
-        <p className="absolute top-10 right-5 bg-red-800 text-gray-50">
-          {errorMessage}
+      {message && (
+        <p className="absolute top-10 p-3 right-5 bg-red-800 text-gray-50">
+          {message}
         </p>
       )}
       {/* error message ends */}

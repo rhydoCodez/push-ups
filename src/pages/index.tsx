@@ -1,8 +1,9 @@
-import type { NextPage } from "next"
+import type { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 // import { useSelector } from "react-redux"
 // import { RootState } from "@/src/app/store"
 import { StudentLoginForm } from "@/src/components/utilities"
+import { connectDB } from "../utils"
 
 const Home: NextPage = () => {
   // check error messsage
@@ -42,3 +43,11 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  await connectDB()
+
+  return {
+    props: {},
+  }
+}

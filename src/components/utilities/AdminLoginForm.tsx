@@ -7,24 +7,33 @@ const AdminLoginForm = () => {
   const [adminUsername, setAdminUsername] = useState<string>("")
   const [adminPassword, setAdminPassword] = useState<string>("")
 
+  const [message, setMessage] = useState<string>("")
+
   const router = useRouter()
+
   const handleAdminLogin = async (e: FormEvent) => {
     e.preventDefault()
 
     try {
-      // go to Admin Dashboard
-      const res = await axios.post("http://localhost:3000/api/admin/login", {
-        userName: adminUsername,
-        password: adminPassword,
-      })
+      const res = await axios.post(
+        "http://localhost:3000/api/auth/admin/login",
+        { userName: adminUsername, password: adminPassword },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
 
-      if (res.status === 200) {
-        router.push("/admin/overview")
-      } else {
-        console.log(res)
-      }
+      setMessage(res.data.message)
+      router.push("/exam")
+      console.log(res)
     } catch (err: any) {
-      return "Error Loggin In"
+      setMessage(err.response.data.message)
+      setTimeout(() => {
+        setMessage("")
+      }, 5000)
+      console.log(err.response.data.message)
     }
   }
 
@@ -33,6 +42,12 @@ const AdminLoginForm = () => {
       <div className="relative w-[100] h-[100]">
         <Image src="/assets/logo.png" alt="" width={100} height={100} />
       </div>
+      {/* error message */}
+      {message && (
+        <p className="absolute top-10 p-3 right-5 bg-red-800 text-gray-50">
+          {message}
+        </p>
+      )}
       <form action="" className="adminLogin__form pt-28 border border-gray-200">
         {/* email address */}
         <div className="relative">
