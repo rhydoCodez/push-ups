@@ -26,8 +26,8 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         const isPasswordCorrect = await argon.verify(
-          password,
-          studentExists.password
+          studentExists.password,
+          password
         )
 
         if (!isPasswordCorrect) {

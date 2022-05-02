@@ -12,6 +12,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (method) {
     case "POST":
       try {
+        connectDB()
         const student = new Student({
           firstName,
           lastName,
@@ -20,7 +21,9 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
           password,
         })
 
-        const studentExists = await Student.findOne({ emailAddress: emailAddress })
+        const studentExists = await Student.findOne({
+          emailAddress: emailAddress,
+        })
 
         if (studentExists) {
           // Bad Request - 400

@@ -25,7 +25,7 @@ const SubjectsDropdown = () => {
                 <p className="dropdown__text">
                   Do: No talking during all exams.
                 </p>
-                <StartTestButton />
+                <StartTestButton subject="Mathematics" />
               </Disclosure.Panel>
             </>
           )}
@@ -49,7 +49,7 @@ const SubjectsDropdown = () => {
                   Do: Do not use any copy, cut, or paste function with your
                   mouse, keyboard, voice command, or device.
                 </p>
-                <StartTestButton />
+                <StartTestButton subject="Literature" />
               </Disclosure.Panel>
             </>
           )}
@@ -73,7 +73,7 @@ const SubjectsDropdown = () => {
                   Do: Remove all other electronic devices from the testing
                   area/room during all exams.
                 </p>
-                <StartTestButton />
+                <StartTestButton subject="Government" />
               </Disclosure.Panel>
             </>
           )}
@@ -97,7 +97,7 @@ const SubjectsDropdown = () => {
                   Do: Do not use any copy, cut, or paste function with your
                   mouse, keyboard, voice command, or device.
                 </p>
-                <StartTestButton />
+                <StartTestButton subject="Economics" />
               </Disclosure.Panel>
             </>
           )}

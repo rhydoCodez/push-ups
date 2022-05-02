@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react"
 import axios from "axios"
 import { connectDB } from "@/src/utils"
+import Question from "@/src/models/question"
 
 connectDB()
 
@@ -35,25 +36,12 @@ const AddNewQuestion = () => {
 
   const createQuestion = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/question",
-        {
-          examType,
-          question,
-          subject,
-          correctAnswer,
-          incorrectAnswers: [
-            incorrectAnswer1,
-            incorrectAnswer2,
-            incorrectAnswer3,
-          ],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+      await connectDB()
+      const res = await axios.post('http://localhost:3000/api/question', {examType, subject, question, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3}, {
+        headers: {
+          "Content-Type": "application/json"
         }
-      )
+      })
 
       if (res.status === 201) {
         setMessage("Question created Successfully")
@@ -71,10 +59,11 @@ const AddNewQuestion = () => {
         }, 5000)
       }
 
+      console.log(res)
       return res.data
     } catch (err: any) {
       console.log("Error adding question", err.message)
-      setMessage(err.message)
+      setMessage('')
       return "Error adding Question"
     }
   }

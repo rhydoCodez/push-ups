@@ -11,10 +11,12 @@ const StudentLoginForm = () => {
 
   const router = useRouter()
 
-  const handleStudentLogin = async () => {
+  const handleStudentLogin = async (e: FormEvent) => {
+    e.preventDefault()
+
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/student",
+        "http://localhost:3000/api/auth/student/login",
         { emailAddress: studentEmail, password: studentPassword },
         {
           headers: {
@@ -22,13 +24,14 @@ const StudentLoginForm = () => {
           },
         }
       )
-      res.data.headers["Content-Type"]
+      // res.data.headers["Content-Type"]
 
-      if (res.status === 200) {
-        router.push("/exam/start-test")
-        console.log(res.data)
-      }
+      // if (res.status === 200) {
+      router.push("/exam")
+      console.log(res.data)
+      // }
     } catch (err: any) {
+      setErrorMessage(err.message)
       console.log(err.message)
     }
   }
@@ -41,10 +44,7 @@ const StudentLoginForm = () => {
 
       {/* error message */}
       {errorMessage && (
-        <p
-          className="absolute top-5 right
-      "
-        >
+        <p className="absolute top-10 right-5 bg-red-800 text-gray-50">
           {errorMessage}
         </p>
       )}
