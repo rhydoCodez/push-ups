@@ -169,7 +169,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
-      questions: response.data.map((question: Question) => ({
+      questions: JSON.parse(
+        JSON.stringify(response.data, getCircularReplacer())
+      ).map((question: Question) => ({
         ...question,
         answers: shuffleArray([
           ...question.incorrectAnswers,
