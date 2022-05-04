@@ -11,6 +11,19 @@ import { useRouter } from "next/router"
 
 const TOTAL_QUESTIONS = 60
 
+const getCircularReplacer = () => {
+  const seen = new WeakSet()
+  return (key: any, value: any) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return
+      }
+      seen.add(value)
+    }
+    return value
+  }
+}
+
 export type Question = {
   _id: string
   examType: string
@@ -167,12 +180,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 }
 
+// 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
+
 export const getStaticPaths: GetStaticPaths = async (context) => {
   const response = await axios.get("http://localhost:3000/api/question")
   const paths = await response.data.questions.map((quest: any) => {
     return {
       params: {
-        subject: quest.subject,
+        subject: JSON.stringify(quest.subject, getCircularReplacer()),
       },
     }
   })
