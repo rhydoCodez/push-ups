@@ -172,7 +172,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   const paths = await response.data.questions.map((quest: any) => {
     return {
       params: {
-        subject: `${quest.subject}`,
+        subject: quest.subject,
       },
     }
   })
