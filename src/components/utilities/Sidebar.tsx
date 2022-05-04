@@ -1,26 +1,22 @@
-import { useState } from "react"
-import Image from "next/image"
+import { FormEvent, useState } from "react"
 import { MdOutlineLogout } from "react-icons/md"
 import Link from "next/link"
 import axios from "axios"
-import { sidebarData } from "../../data/sidebar"
-import { IconType } from "react-icons"
+import { sidebarData } from "@/src/data/sidebar"
 
 const Sidebar = () => {
   const [selected, setSelected] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>("")
 
-  const handleSelected = () => {
-    setSelected(true)
-
-    // className={`${selected ? "border-b-2 border-gray-50 pb-2" : ""}`}
-  }
-
-  const handleLogout = async (e: Event) => {
+  const handleLogout = async (e: FormEvent) => {
     e.preventDefault()
 
-    const res = await axios.get("/api/auth/logout")
-    const data = res.data.json()
-    console.log(data)
+    try {
+      await axios.get("http://localhost:3000/api/auth/logout")
+      return
+    } catch (err: any) {
+      return err.response.data.message
+    }
   }
   return (
     <aside className="dashboard__sidebar">
@@ -36,7 +32,7 @@ const Sidebar = () => {
       })}
 
       {/* logout */}
-      <button title="Logout" onClick={() => handleLogout}>
+      <button title="Logout" onClick={handleLogout}>
         <MdOutlineLogout className="dashboard__icon" />
       </button>
     </aside>

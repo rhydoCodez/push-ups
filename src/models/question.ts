@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, models, model } from "mongoose"
 
 mongoose.Promise = global.Promise
 
@@ -34,6 +34,6 @@ const questionSchema = new Schema(
   }
 )
 
-const Question = mongoose.model("Question", questionSchema)
+const Question = models.Question || model("Question", questionSchema)
 
 export default Question

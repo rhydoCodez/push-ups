@@ -21,12 +21,15 @@ const NewQuestionCard: FC<Props> = ({
   totalQuestions,
 }) => {
   return (
-    <div className="w-[500px] my-5">
+    <div className="w-[500px] my-5 h-[300px]">
       <p>
         Question {questionNumber} / {totalQuestions}
       </p>
 
-      <p dangerouslySetInnerHTML={{ __html: question }} />
+      <p
+        className="mb-5 font-semibold"
+        dangerouslySetInnerHTML={{ __html: question }}
+      />
 
       <div className="w-full">
         {answers.map((answer, index) => (

@@ -63,4 +63,4 @@ adminSchema.pre("save", async function hashPassword(next) {
   next()
 })
 
-export default mongoose.models.Admin || mongoose.model("Admin", adminSchema)
+export default mongoose.models?.Admin || mongoose.model("Admin", adminSchema)

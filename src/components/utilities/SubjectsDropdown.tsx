@@ -34,7 +34,7 @@ const SubjectsDropdown = () => {
           {({ open }) => (
             <>
               <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                <span className="dropdown__span">English Language</span>
+                <span className="dropdown__span">Literature</span>
                 <ChevronUpIcon
                   className={`${
                     open ? "transform rotate-180" : ""
@@ -58,7 +58,7 @@ const SubjectsDropdown = () => {
           {({ open }) => (
             <>
               <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                <span className="dropdown__span">Physics</span>
+                <span className="dropdown__span">Government</span>
                 <ChevronUpIcon
                   className={`${
                     open ? "transform rotate-180" : ""
@@ -97,7 +97,8 @@ const SubjectsDropdown = () => {
                   Do: Do not use any copy, cut, or paste function with your
                   mouse, keyboard, voice command, or device.
                 </p>
-                <StartTestButton subject="Economics" />
+                <StartTestButton subject="Chemistry" />
+                <StartTestButton subject="English Language" />
               </Disclosure.Panel>
             </>
           )}

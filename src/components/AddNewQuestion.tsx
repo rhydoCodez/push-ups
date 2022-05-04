@@ -8,7 +8,7 @@ connectDB()
 const examTypes = ["JAMB/UTME", "ACADEMICS", "POST JAMB/UTME"]
 const subjects = ["Mathematics", "English Language", "Physics", "Chemistry"]
 
-const AddNewQuestion = () => {
+const  AddNewQuestion = () => {
   const [question, setQuestion] = useState<string>("")
   const [examType, setExamType] = useState("")
   const [subject, setSubject] = useState<string>("")

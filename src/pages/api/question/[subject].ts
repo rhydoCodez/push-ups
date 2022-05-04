@@ -4,28 +4,31 @@ import { connectDB } from "@/src/utils"
 
 connectDB()
 
-const handleQuestionById = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  const {
-    query: { subject },
-    method,
-    body,
-  } = req
+interface IMyQuery extends NextApiRequest {
+  query: {
+    [key: string]: string
+  }
+}
+
+const handleQuestionById = async (req: IMyQuery, res: NextApiResponse) => {
+  const { method, body } = req
+
+  const { subject } = req.query
 
   switch (method) {
     case "GET":
       try {
-        const questions = await Question.find({ subject: subject })
+        const subjectQuestions = await Question.find({
+          subject: subject.split("-").join(" "),
+        })
 
-        if (!questions) {
+        if (!subjectQuestions) {
           return res
             .status(404)
-            .json({ message: "Question does not exist!..." })
+            .json({ message: "No Questions for the specified Subject!..." })
         }
 
-        return res.status(200).json(questions)
+        return res.status(200).json(subjectQuestions)
       } catch (err: any) {
         return res.status(400).json({ message: err.message })
       }
@@ -33,7 +36,7 @@ const handleQuestionById = async (
     case "DELETE":
       try {
         const deletedQuestion = await Question.findByIdAndDelete(subject)
-        
+
         if (!deletedQuestion) {
           return res
             .status(404)
