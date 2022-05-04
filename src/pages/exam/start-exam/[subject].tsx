@@ -190,7 +190,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     return {
       params: {
         subject: JSON.parse(
-          JSON.stringify(quest.subject, getCircularReplacer())
+          JSON.stringify(`${quest.subject}`, getCircularReplacer())
         ),
       },
     }
