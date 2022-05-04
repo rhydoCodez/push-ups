@@ -189,7 +189,9 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   const paths = await response.data.questions.map((quest: any) => {
     return {
       params: {
-        subject: JSON.stringify(quest.subject, getCircularReplacer()),
+        subject: JSON.parse(
+          JSON.stringify(quest.subject, getCircularReplacer())
+        ),
       },
     }
   })
